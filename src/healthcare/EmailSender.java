@@ -9,7 +9,7 @@ import javax.mail.internet.*;
 import java.util.*;
 /**
  *
- * @author Jing
+ * @author Jing Liang
  */
 public class EmailSender {
     private Session session;

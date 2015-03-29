@@ -7,15 +7,20 @@ package healthcare;
 
 /**
  *
- * @author Jing
+ * @author Jing Liang
  */
 public class DataAccessor {
     public DataAccessor()
     {
         
     }
-    public Patient getUser(String username)
+    public User getUser(String username)
     {
+        //get user from the database
         return null;
+    }
+    public void storeUser(User user)
+    {
+        //store user to the database
     }
 }

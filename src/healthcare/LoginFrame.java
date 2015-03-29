@@ -9,7 +9,7 @@ import java.awt.font.TextAttribute;
 import javax.swing.*;
 /**
  *
- * @author Jing
+ * @author Jing Liang
  */
 public class LoginFrame extends javax.swing.JFrame {
 
@@ -71,6 +71,11 @@ public class LoginFrame extends javax.swing.JFrame {
         lblCreate.setText("Create New Account");
         lblCreate.setRequestFocusEnabled(false);
         lblCreate.setVerifyInputWhenFocusTarget(false);
+        lblCreate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCreateMouseClicked(evt);
+            }
+        });
 
         lblRecover.setFont(new java.awt.Font("Tahoma", 0, 12).deriveFont(fontAttributes));
         lblRecover.setText("Recover Password");
@@ -185,6 +190,10 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_lblRecoverMouseClicked
+
+    private void lblCreateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCreateMouseClicked
+        CreateAccountFrame caFrame = new CreateAccountFrame(this);
+    }//GEN-LAST:event_lblCreateMouseClicked
 
     /**
      * @param args the command line arguments

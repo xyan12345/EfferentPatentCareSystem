@@ -7,7 +7,7 @@ package healthcare;
 
 /**
  *
- * @author Jing
+ * @author Jing Liang
  */
 public class Visit {
     public Visit()

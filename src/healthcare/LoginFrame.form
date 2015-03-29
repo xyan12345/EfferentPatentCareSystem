@@ -169,6 +169,9 @@
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
             <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblCreateMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblRecover">
           <Properties>

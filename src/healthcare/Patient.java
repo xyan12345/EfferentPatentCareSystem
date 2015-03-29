@@ -7,7 +7,7 @@ package healthcare;
 import java.util.*;
 /**
  *
- * @author Jing
+ * @author Jing Liang
  */
 public class Patient extends User {
     private ArrayList<PainEntry> painHistory;
