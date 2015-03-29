@@ -16,9 +16,9 @@ public class LoginFrame extends javax.swing.JFrame {
     /**
      * Creates new form LoginFrame
      */
-    private Map<TextAttribute, Integer> fontAttributes;
+    private final Map<TextAttribute, Integer> fontAttributes;
     public LoginFrame() {
-        fontAttributes = new HashMap<TextAttribute, Integer>();
+        fontAttributes = new HashMap<>();
         fontAttributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         initComponents();
     }
@@ -150,14 +150,39 @@ public class LoginFrame extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        DataAccessor accessor = new DataAccessor();
+        User user = accessor.getUser(username);
+        if (user==null) JOptionPane.showMessageDialog(this, "Account with this username is not found.");
+        else
+        {
+            if(user.getPassword().equals(password))
+            {
+                //go to the patientFrame or doctorFrame
+            }
+            else JOptionPane.showMessageDialog(this, "Password is incorrect, please re-enter the password.");
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void lblRecoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRecoverMouseClicked
-        if(txtUsername.getText().equals("")) JOptionPane.showMessageDialog(this, "Please enter the user name.");
+        String username = txtUsername.getText();
+        if(username.equals("")) JOptionPane.showMessageDialog(this, "Please enter the user name.");
         else
         {
-            //sent the email with password to the user
-            JOptionPane.showMessageDialog(this, "Your password has been sent to your email address..");
+            DataAccessor accessor = new DataAccessor();
+            User user = accessor.getUser(username);
+            if (user==null) JOptionPane.showMessageDialog(this, "Account with this username is not found.");
+            else
+            {
+                String password = user.getPassword();
+                EmailSender es = new EmailSender();
+                try{
+                    es.setReceiver(user.getEmailAddress());
+                }catch(Exception e){};
+                es.sendMail("Password Recovery","You password is "+password);
+                JOptionPane.showMessageDialog(this, "Your password has been sent to your email address..");
+            }
         }
     }//GEN-LAST:event_lblRecoverMouseClicked
 
@@ -190,6 +215,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new LoginFrame().setVisible(true);
             }
