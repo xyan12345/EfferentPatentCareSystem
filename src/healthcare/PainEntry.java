@@ -39,15 +39,18 @@ public class PainEntry {
         return average;
     }
 
-    public int[] getPainInfo() {
+    
+        public int getPainInfo(int a)
+    {
         painInfo = new int[5];
-        painInfo[0] = pain;
-        painInfo[1] = drowsiness;
-        painInfo[2] = nausean;
-        painInfo[3] = anxiety;
-        painInfo[4] = depression;
-
-        return painInfo;
+        painInfo[0]=pain;
+         painInfo[1]=drowsiness;
+          painInfo[2]=nausean;
+           painInfo[3]=anxiety;
+            painInfo[5]=depression;
+        
+    
+        return painInfo[a];
     }
 
     public void setPatient(Patient newPat) {
