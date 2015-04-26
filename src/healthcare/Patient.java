@@ -9,7 +9,7 @@ import java.util.*;
  *
  * @author Jing Liang
  */
-public class Patient extends User {
+public class Patient extends User implements java.io.Serializable {
     private ArrayList<PainEntry> painHistory;
     private ArrayList<Visit> visitHistory;
     public Patient(String username,String password)
@@ -21,6 +21,8 @@ public class Patient extends User {
     public Patient(String username,String password,String name,String sex,int age,String ead,String phone)
     {
         super(username,password,name,sex,age,ead,phone);
+        painHistory = new ArrayList<>();
+        visitHistory = new ArrayList<>();
     }
     public ArrayList<PainEntry> getPainHistory()
     {

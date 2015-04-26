@@ -9,7 +9,7 @@ package healthcare;
  *
  * @author Jing Liang
  */
-public class Doctor extends User {
+public class Doctor extends User implements java.io.Serializable {
     private String hospital;
     public Doctor(String username,String password)
     {

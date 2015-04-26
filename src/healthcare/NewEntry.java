@@ -9,6 +9,7 @@ import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -18,12 +19,13 @@ import java.util.Date;
  */
 public class NewEntry extends javax.swing.JFrame {
     int n1,n2,n3,n4,n5;
-
+    private Patient patient;
     /**
      * Creates new form newEntry
      */
-    public NewEntry() {
+    public NewEntry(Patient pa) {
         initComponents();
+        patient = pa;
     }
 
     /**
@@ -234,15 +236,21 @@ public void close()
 }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
        PainEntry en = new PainEntry(n1,n2,n3,n4,n5);
+       en.setPatient(patient.getUserName());
        en.setDate(new Date());
-        close();// TODO add your handling code here:
+       patient.addPain(en);
+       WaitingList list = DataAccessor.getWaitingList();
+       list.add(en);
+       DataAccessor.storeWaitingList(list);
+       DataAccessor.storeUser(patient);
+       this.setVisible(false);
     }                                        
 
     private void jSlider6StateChanged(javax.swing.event.ChangeEvent evt) {                                      
         // TODO add your handling code here:
         if(!jSlider6.getValueIsAdjusting())
         {
-        int n1 =(int) jSlider6.getValue();
+        n1 =(int) jSlider6.getValue();
         jLabel18.setText(n1 + "");
         }
     }                                     
@@ -251,7 +259,7 @@ public void close()
         // TODO add your handling code here:
         if(!jSlider7.getValueIsAdjusting())
         {
-        int n2 =(int) jSlider7.getValue();
+        n2 =(int) jSlider7.getValue();
         jLabel19.setText(n2 + "");
         }
     }                                     
@@ -260,7 +268,7 @@ public void close()
         // TODO add your handling code here:
         if(!jSlider8.getValueIsAdjusting())
         {
-        int n3 =(int) jSlider8.getValue();
+        n3 =(int) jSlider8.getValue();
         jLabel20.setText(n3 + "");
         }
     }                                     
@@ -269,7 +277,7 @@ public void close()
         // TODO add your handling code here:
         if(!jSlider9.getValueIsAdjusting())
         {
-        int n4 =(int) jSlider9.getValue();
+        n4 =(int) jSlider9.getValue();
         jLabel21.setText(n4 + "");
         }
     }                                     
@@ -278,45 +286,11 @@ public void close()
         // TODO add your handling code here:
         if(!jSlider10.getValueIsAdjusting())
         {
-        int n5 =(int) jSlider10.getValue();
+        n5 =(int) jSlider10.getValue();
         jLabel22.setText(n5 + "");
         }
     }                                      
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NewEntry().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButton1;

@@ -9,7 +9,7 @@ package healthcare;
  *
  * @author Jing Liang
  */
-public class User {
+public class User implements java.io.Serializable {
     private String username,password,name,gender,emailAddress,phoneNumber;
     private int age;
     public User(String username,String password)

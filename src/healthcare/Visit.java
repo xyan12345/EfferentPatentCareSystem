@@ -11,31 +11,28 @@ import java.util.Date;
  *
  * @author Ye
  */
-public class Visit {
-
-    private Doctor doc;
-    private Patient pat;
-    private String hospital, treatment;
+public class Visit implements java.io.Serializable {
+    private String pat,doc,hospital, treatment;
     private Date date;
 
-    public Visit(Doctor newDoc, Patient newPat) {
+    public Visit(String newDoc, String newPat) {
         doc = newDoc;
         pat = newPat;
     }
 
-    public void setPatient(Patient pat1) {
+    public void setPatient(String pat1) {
         pat = pat1;
     }
     
-    public Patient getPatient() {
+    public String getPatient() {
         return pat;
     }
     
-    public void setDoctor(Doctor do1) {
+    public void setDoctor(String do1) {
         doc = do1;
     }
 
-    public Doctor getDoctor() {
+    public String getDoctor() {
         return doc;
     }
 

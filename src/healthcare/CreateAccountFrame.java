@@ -261,17 +261,22 @@ public class CreateAccountFrame extends javax.swing.JFrame {
         else if (btnDoctor.isSelected()&& hospital.equals("")) JOptionPane.showMessageDialog(this, "Please enter the hospital.");
         else
         {
-            DataAccessor accessor = new DataAccessor();
             if(btnPatient.isSelected())
             {
                 Patient patient = new Patient(username,password1,name,gender,age,emailAddress,phone);
-                accessor.storeUser(patient);
+                User user = DataAccessor.getUser(username);
+                if(user==null) DataAccessor.storeUser(patient);
+                else
+                {
+                    JOptionPane.showMessageDialog(this, "Duplicate username.");
+                    return;
+                }
             }
             else
             {
                 Doctor doctor = new Doctor(username,password1,name,gender,age,emailAddress,phone);
                 doctor.setHospital(hospital);
-                accessor.storeUser(doctor);
+                DataAccessor.storeUser(doctor);
             }
             JOptionPane.showMessageDialog(this, "Create Account successfully.");
             this.setVisible(false);

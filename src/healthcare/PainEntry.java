@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Ye
  */
-public class PainEntry {
+public class PainEntry implements java.io.Serializable {
 
     private int[] painInfo;
     private int pain = 0;
@@ -21,9 +21,9 @@ public class PainEntry {
     private int depression = 0;
     private int average = 0;
     private boolean treated;
-    private Doctor doc;
+    private String doc;
     private Date date;
-    private Patient pat;
+    private String pat;
 
     public PainEntry(int pa, int dr, int na, int an, int de) {
         pain = pa;
@@ -33,6 +33,7 @@ public class PainEntry {
         depression = de;
         average = (pa + dr + na + an + de) / 5;
         treated = false;
+        doc = "";
     }
 
     public int getAvePain() {
@@ -53,19 +54,19 @@ public class PainEntry {
         return painInfo[a];
     }
 
-    public void setPatient(Patient newPat) {
+    public void setPatient(String newPat) {
         this.pat = newPat;
     }
     
-    public Patient getPatient() {
+    public String getPatient() {
         return pat;
     }
 
-    public void setDoctor(Doctor doc) {
+    public void setDoctor(String doc) {
         this.doc = doc;
     }
 
-    public Doctor getDoctor() {
+    public String getDoctor() {
         return doc;
     }
 

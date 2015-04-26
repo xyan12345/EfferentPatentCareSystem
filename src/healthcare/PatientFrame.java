@@ -11,12 +11,13 @@ package healthcare;
  * @author xuefengyan
  */
 public class PatientFrame extends javax.swing.JFrame {
-
+    private Patient patient;
     /**
      * Creates new form PatientFrame
      */
-    public PatientFrame() {
+    public PatientFrame(Patient pa) {
         initComponents();
+        patient = pa;
     }
 
     /**
@@ -98,7 +99,7 @@ public class PatientFrame extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        NewEntry ne=new NewEntry();// TODO add your handling code here:
+        NewEntry ne=new NewEntry(patient);// TODO add your handling code here:
         ne.setVisible(true);
     }                                        
 
@@ -144,7 +145,7 @@ public class PatientFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PatientFrame().setVisible(true);
+                new PatientFrame(new Patient("1","1")).setVisible(true);
             }
         });
     }

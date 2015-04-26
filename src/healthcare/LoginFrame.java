@@ -157,14 +157,18 @@ public class LoginFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         String username = txtUsername.getText();
         String password = txtPassword.getText();
-        DataAccessor accessor = new DataAccessor();
-        User user = accessor.getUser(username);
+        User user = DataAccessor.getUser(username);
         if (user==null) JOptionPane.showMessageDialog(this, "Account with this username is not found.");
         else
         {
             if(user.getPassword().equals(password))
             {
-                //go to the patientFrame or doctorFrame
+                if(user instanceof Patient)
+                {
+                    PatientFrame pf = new PatientFrame((Patient) user);
+                    pf.setVisible(true);
+                    this.setVisible(false);
+                }
             }
             else JOptionPane.showMessageDialog(this, "Password is incorrect, please re-enter the password.");
         }
