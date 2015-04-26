@@ -5,58 +5,61 @@
  */
 package healthcare;
 
+import java.util.Date;
+
 /**
  *
  * @author Ye
  */
 public class Visit {
-    
-    private String doc1;
-    private String date2,pat,hospital,treatment;
-    
-    
-   public Visit(String newDoc, String newPat)
-   {
-     doc1=newDoc;
-     pat=newPat;
-   }
-   
-    public void setPatient(String pat1)
-    {
-    pat=pat1;
+
+    private Doctor doc;
+    private Patient pat;
+    private String hospital, treatment;
+    private Date date;
+
+    public Visit(Doctor newDoc, Patient newPat) {
+        doc = newDoc;
+        pat = newPat;
     }
-   public void setDoctor(String do1)
-   {
-       doc1=do1;
-   }
-   public String getDoctor()
-    {
-         return doc1;     
-     }
-     public String getDate()
-{
-         return date2;
-}
-     public void setDate(String newDat)
-{
-          date2=newDat;
-}
-     public void setTreatment(String t)
-     {
-                   treatment=t; 
-     }
-     public String getTreatment()
-     {
-         return treatment;
-     }
-     public void setHospital(String hp)
-     {
-                  hospital=hp; 
-     }
-     public String getHospital()
-     {
-         return hospital;
-     }
-}
 
+    public void setPatient(Patient pat1) {
+        pat = pat1;
+    }
+    
+    public Patient getPatient() {
+        return pat;
+    }
+    
+    public void setDoctor(Doctor do1) {
+        doc = do1;
+    }
 
+    public Doctor getDoctor() {
+        return doc;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date newDat) {
+        date = newDat;
+    }
+
+    public void setTreatment(String t) {
+        treatment = t;
+    }
+
+    public String getTreatment() {
+        return treatment;
+    }
+
+    public void setHospital(String hp) {
+        hospital = hp;
+    }
+
+    public String getHospital() {
+        return hospital;
+    }
+}

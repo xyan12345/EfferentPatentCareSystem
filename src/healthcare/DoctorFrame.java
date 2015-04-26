@@ -187,7 +187,7 @@ public class DoctorFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Antenna().setVisible(true);
+                new DoctorFrame().setVisible(true);
             }
         });
     }
