@@ -1,3 +1,5 @@
+package healthcare;
+
 public class DoctorFrame extends javax.swing.JFrame {
     
     /** Creates new form Antenna */
