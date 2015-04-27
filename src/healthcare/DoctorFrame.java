@@ -62,7 +62,7 @@ public class DoctorFrame extends javax.swing.JFrame {
                 data[2] = "not yet";
                 tableModel.addRow(data);
             }
-            else if(p.getDocUserName().equals(doctor.getUserName()) && !p.getTreateStatus()) 
+            else if(p.getDocUserName().equals(doctor.getUserName()) && p.getTreateStatus()==false) 
             {
                 data[2]="Accepted";
                 tableModel.addRow(data);
@@ -264,7 +264,8 @@ public class DoctorFrame extends javax.swing.JFrame {
 
     private void markAsTreatedBtnActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         int row = waitingListTable.getSelectedRow();
-        if(row!=-1)
+        String acc =(String) waitingListTable.getModel().getValueAt(row, 2);
+        if(row!=-1 && acc.equals("Accepted"))
         {
             // Removes Patient From List
             String name =(String) waitingListTable.getModel().getValueAt(row, 0);

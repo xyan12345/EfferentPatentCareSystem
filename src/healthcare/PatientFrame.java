@@ -97,6 +97,7 @@ public class PatientFrame extends javax.swing.JFrame {
                 "Date", "Pain Average", "Treated by"
             }
         ));
+        jTablePain.setEnabled(false);
         jScrollPane1.setViewportView(jTablePain);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -122,6 +123,7 @@ public class PatientFrame extends javax.swing.JFrame {
                 "Date", "Hospital Name", "Doctor"
             }
         ));
+        jTableVisit.setEnabled(false);
         jScrollPane2.setViewportView(jTableVisit);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

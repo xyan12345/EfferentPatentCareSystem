@@ -5,6 +5,7 @@
  */
 package healthcare;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -87,6 +88,7 @@ public class FeedBackFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        //change the data in Patient, add Visit to Patient and store it
         pat.getLatestPain().setTreateStatus(true);
         Visit v = new Visit(doc.getUserName(),pat.getUserName());
         v.setDocName(doc.getName());
@@ -95,6 +97,19 @@ public class FeedBackFrame extends javax.swing.JFrame {
         v.setTreatment(txtTreatment.getText());
         pat.addVisit(v);
         DataAccessor.storeUser(pat);
+        
+        //change data in the WaitingList and store it
+        WaitingList wlist = DataAccessor.getWaitingList();
+        ArrayList<PainEntry> list = wlist.getList();
+        for (PainEntry p : list) {
+            if(p.getPatUserName().equals(pat.getUserName()))
+            {
+                p.setTreateStatus(true);
+                break;
+            }
+        }
+        DataAccessor.storeWaitingList(wlist);
+        
         this.setVisible(false);
     }//GEN-LAST:event_btnSaveActionPerformed
 
