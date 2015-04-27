@@ -22,12 +22,16 @@ public class WaitingList implements java.io.Serializable {
     {
         for (Iterator<PainEntry> it = list.iterator(); it.hasNext();) {
             PainEntry e = it.next();
-            if(e.getPatient().equals(entry.getPatient()))
+            if(e.getPatUserName().equals(entry.getPatUserName()))
             {
                 list.remove(e);
                 break;
             }
         }
         list.add(entry);
+    }
+    public ArrayList<PainEntry> getList()
+    {
+        return list;
     }
 }

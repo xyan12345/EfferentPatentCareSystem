@@ -8,7 +8,6 @@ package healthcare;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.io.*;
-import java.util.ArrayList;
 
 /**
  *

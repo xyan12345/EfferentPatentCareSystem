@@ -28,18 +28,50 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package examples;
-
-import javax.swing.table.TableModel;
+package healthcare;
+/**
+ *
+ * @author Jing Liang & dougdliu
+ */
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
 
 public class DoctorFrame extends javax.swing.JFrame {
-    
+    private Doctor doctor;
+    private String[] data;
+    DefaultTableModel tableModel;
     /** Creates new form DoctorFrame */
-    public DoctorFrame() {
+    public DoctorFrame(Doctor doc) {
+        doctor = doc;
         initComponents();
+        updateTable();
     }
-    
+    public void updateTable()
+    {
+        tableModel = new DefaultTableModel(new String [] {"Name", "Average Pain Level", "Acceptance"},0);
+        WaitingList wlist = DataAccessor.getWaitingList();
+        ArrayList<PainEntry> list = wlist.getList();
+        data = new String[3];
+        for (PainEntry p : list) {
+            data[0] = p.getPatName();
+            data[1] = p.getAvePain()+"";
+            if("".equals(p.getDocUserName()))
+            {
+                data[2] = "not yet";
+                tableModel.addRow(data);
+            }
+            else if(p.getDocUserName().equals(doctor.getUserName()) && !p.getTreateStatus()) 
+            {
+                data[2]="Accepted";
+                tableModel.addRow(data);
+            }
+        }
+        waitingListTable.setModel(tableModel);
+        waitingListTable.getRowSorter().toggleSortOrder(1);
+        waitingListTable.getRowSorter().toggleSortOrder(2);
+    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -57,8 +89,7 @@ public class DoctorFrame extends javax.swing.JFrame {
         markAsTreatedBtn = new javax.swing.JButton();
         refreshBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Antenna");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         manageAccountBtn.setText("Manage Account");
         manageAccountBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -77,10 +108,9 @@ public class DoctorFrame extends javax.swing.JFrame {
         waitingListTable.setAutoCreateRowSorter(true);
         waitingListTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Steve",  new Double(6.5), "Not Accepted"},
-                {"Linda",  new Double(2.2), "Not Accepted"},
-                {"Sona",  new Double(5.6), "Not Accepted"},
-                {"John",  new Double(5.4), "Not Accepted"}
+                {null,  null, null},
+                {null,  null, null},
+                {null,  null, null}
             },
             new String [] {
                 "Name", "Average Pain Level", "Acceptance"
@@ -175,73 +205,90 @@ public class DoctorFrame extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     private void manageAccountBtnActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-        // Display Manage Account information
-        ContactEditor edit = new ContactEditor();
-        edit.setVisible(true);
+        ManageAccountFrame manage = new ManageAccountFrame(doctor);
+        manage.setVisible(true);
     }                                                
 
     private void rejectBtnActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // Reject Patient and move them off the doctor's personal list
-        
-        DefaultTableModel model = (DefaultTableModel) waitingListTable.getModel();
-        model.removeRow(waitingListTable.getSelectedRow());
+        if(waitingListTable.getSelectedRow()!=-1)
+        {
+            DefaultTableModel model = (DefaultTableModel) waitingListTable.getModel();
+            model.removeRow(waitingListTable.getSelectedRow());
+        }
     }                                         
 
     private void acceptBtnActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // Mark Patient as Accepted 
-        waitingListTable.setValueAt("Accepted", waitingListTable.getSelectedRow(), 2);
+        int row = waitingListTable.getSelectedRow();
+        if(row!=-1)
+        {
+        waitingListTable.setValueAt("Accepted", row, 2);
+        String name =(String) waitingListTable.getModel().getValueAt(row, 0);
+        WaitingList wlist = DataAccessor.getWaitingList();
+        Patient pat;
+        ArrayList<PainEntry> list = wlist.getList();
+        for (PainEntry p : list) {
+            if(p.getPatName().equals(name))
+            {
+                p.setDocName(doctor.getName());
+                p.setDocUserName(doctor.getUserName());
+                pat =(Patient) DataAccessor.getUser(p.getPatUserName());
+                pat.getLatestPain().setDocName(doctor.getName());
+                pat.getLatestPain().setDocUserName(doctor.getUserName());
+                DataAccessor.storeUser(pat);
+                break;
+            }
+        }
+        DataAccessor.storeWaitingList(wlist);
+        }
     }                                         
 
     private void viewMoreInformationBtnActionPerformed(java.awt.event.ActionEvent evt) {                                                       
-        // View Detailed Patient Information
-        Find find = new Find();
-        find.setVisible(true);
-    }                                                      
+        int row = waitingListTable.getSelectedRow();
+        if(row!=-1)
+        {
+            String name =(String) waitingListTable.getModel().getValueAt(row, 0);
+            WaitingList wlist = DataAccessor.getWaitingList();
+            ArrayList<PainEntry> list = wlist.getList();
+            for (PainEntry p : list) {
+                if(p.getPatName().equals(name))
+                {
+                    Patient pat = (Patient) DataAccessor.getUser(p.getPatUserName());
+                    InformationFrame frame = new InformationFrame(pat);
+                    frame.setVisible(true);
+                }
+            }
+        }
+    }
 
     private void markAsTreatedBtnActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-        // Removes Patient From List
-        DefaultTableModel model = (DefaultTableModel) waitingListTable.getModel();
-        model.removeRow(waitingListTable.getSelectedRow());
+        int row = waitingListTable.getSelectedRow();
+        if(row!=-1)
+        {
+            // Removes Patient From List
+            String name =(String) waitingListTable.getModel().getValueAt(row, 0);
+            WaitingList wlist = DataAccessor.getWaitingList();
+            ArrayList<PainEntry> list = wlist.getList();
+            for (PainEntry p : list) {
+                if(p.getPatName().equals(name))
+                {
+                    Patient pat = (Patient) DataAccessor.getUser(p.getPatUserName());
+                    FeedBackFrame frame = new FeedBackFrame(pat,doctor);
+                    frame.setVisible(true);
+                    break;
+                }
+            }
+            DefaultTableModel model = (DefaultTableModel) waitingListTable.getModel();
+            model.removeRow(row);
+        }
     }                                                
 
     private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
+        updateTable();
     }                                          
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            javax.swing.UIManager.LookAndFeelInfo[] installedLookAndFeels=javax.swing.UIManager.getInstalledLookAndFeels();
-            for (int idx=0; idx<installedLookAndFeels.length; idx++)
-                if ("Nimbus".equals(installedLookAndFeels[idx].getName())) {
-                    javax.swing.UIManager.setLookAndFeel(installedLookAndFeels[idx].getClassName());
-                    break;
-                }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Antenna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Antenna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Antenna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Antenna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Antenna().setVisible(true);
-            }
-        });
-    }
+    
     
     // Variables declaration - do not modify                     
     private javax.swing.JButton acceptBtn;

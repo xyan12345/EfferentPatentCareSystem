@@ -238,7 +238,8 @@ public void close()
 }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
        PainEntry en = new PainEntry(n1,n2,n3,n4,n5);
-       en.setPatient(patient.getUserName());
+       en.setPatUserName(patient.getUserName());
+       en.setPatName(patient.getName());
        en.setDate(new Date());
        patient.addPain(en);
        WaitingList list = DataAccessor.getWaitingList();

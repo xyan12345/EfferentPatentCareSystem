@@ -32,7 +32,7 @@ public class PatientFrame extends javax.swing.JFrame {
      */
     public void updateTable()
     {
-        tableModelPain = new DefaultTableModel(new String [] {"Date", "Pain Average", "Treated by"},0);
+        tableModelPain = new DefaultTableModel(new String [] {"Date", "Pain Average", "Accepted by"},0);
         tableModelVisit = new DefaultTableModel(new String [] {"Date", "Hospital Name", "Doctor"},0);
         ArrayList<PainEntry> painList = patient.getPainHistory();
         ArrayList<Visit> visitList = patient.getVisitHistory();

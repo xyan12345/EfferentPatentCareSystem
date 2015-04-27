@@ -23,7 +23,7 @@ public class PainEntry implements java.io.Serializable {
     private boolean treated;
     private String docUserName,docName;
     private Date date;
-    private String pat;
+    private String patUserName,patName;
 
     public PainEntry(int pa, int dr, int na, int an, int de) {
         pain = pa;
@@ -42,25 +42,31 @@ public class PainEntry implements java.io.Serializable {
     }
 
     
-        public int getPainInfo(int a)
+        public int[] getPainInfo()
     {
         painInfo = new int[5];
         painInfo[0]=pain;
          painInfo[1]=drowsiness;
           painInfo[2]=nausean;
            painInfo[3]=anxiety;
-            painInfo[5]=depression;
+            painInfo[4]=depression;
         
-    
-        return painInfo[a];
+        return painInfo;
     }
 
-    public void setPatient(String newPat) {
-        this.pat = newPat;
+    public void setPatUserName(String newPat) {
+        this.patUserName = newPat;
     }
     
-    public String getPatient() {
-        return pat;
+    public String getPatUserName() {
+        return patUserName;
+    }
+    public void setPatName(String newPat) {
+        this.patName = newPat;
+    }
+    
+    public String getPatName() {
+        return patName;
     }
 
     public void setDocUserName(String doc) {
@@ -94,4 +100,5 @@ public class PainEntry implements java.io.Serializable {
     public boolean getTreateStatus() {
         return treated;
     }
+    
 }
