@@ -21,7 +21,7 @@ public class PainEntry implements java.io.Serializable {
     private int depression = 0;
     private int average = 0;
     private boolean treated;
-    private String doc;
+    private String docUserName,docName;
     private Date date;
     private String pat;
 
@@ -33,7 +33,8 @@ public class PainEntry implements java.io.Serializable {
         depression = de;
         average = (pa + dr + na + an + de) / 5;
         treated = false;
-        doc = "";
+        docUserName = "";
+        docName = "";
     }
 
     public int getAvePain() {
@@ -62,12 +63,20 @@ public class PainEntry implements java.io.Serializable {
         return pat;
     }
 
-    public void setDoctor(String doc) {
-        this.doc = doc;
+    public void setDocUserName(String doc) {
+        this.docUserName = doc;
     }
 
-    public String getDoctor() {
-        return doc;
+    public String getDocUserName() {
+        return docUserName;
+    }
+    
+    public void setDocName(String doc) {
+        this.docName = doc;
+    }
+
+    public String getDocName() {
+        return docName;
     }
 
     public Date getDate() {

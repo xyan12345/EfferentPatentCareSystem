@@ -20,12 +20,14 @@ import java.util.Date;
 public class NewEntry extends javax.swing.JFrame {
     int n1,n2,n3,n4,n5;
     private Patient patient;
+    private PatientFrame frame;
     /**
      * Creates new form newEntry
      */
-    public NewEntry(Patient pa) {
+    public NewEntry(Patient pa,PatientFrame frame) {
         initComponents();
         patient = pa;
+        this.frame = frame;
     }
 
     /**

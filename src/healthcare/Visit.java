@@ -12,11 +12,11 @@ import java.util.Date;
  * @author Ye
  */
 public class Visit implements java.io.Serializable {
-    private String pat,doc,hospital, treatment;
+    private String pat,docUserName,docName,hospital, treatment;
     private Date date;
 
     public Visit(String newDoc, String newPat) {
-        doc = newDoc;
+        docUserName = newDoc;
         pat = newPat;
     }
 
@@ -28,12 +28,20 @@ public class Visit implements java.io.Serializable {
         return pat;
     }
     
-    public void setDoctor(String do1) {
-        doc = do1;
+    public void setDocUserName(String do1) {
+        docUserName = do1;
     }
 
-    public String getDoctor() {
-        return doc;
+    public String getDocUserName() {
+        return docUserName;
+    }
+    
+    public void setDocName(String do1) {
+        docName = do1;
+    }
+
+    public String getDocName() {
+        return docName;
     }
 
     public Date getDate() {
