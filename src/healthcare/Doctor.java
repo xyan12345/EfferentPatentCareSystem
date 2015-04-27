@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class stores the information of Doctor which extends User
  */
 package healthcare;
 
@@ -11,6 +9,7 @@ package healthcare;
  */
 public class Doctor extends User implements java.io.Serializable {
     private String hospital;
+    //instructor for Doctor class
     public Doctor(String username,String password)
     {
         super(username,password);
@@ -19,6 +18,8 @@ public class Doctor extends User implements java.io.Serializable {
     {
         super(username,password,name,sex,age,ead,phone);
     }
+    
+    //getter and setter methods
     public String getHospital()
     {
         return hospital;

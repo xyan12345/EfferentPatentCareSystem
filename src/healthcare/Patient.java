@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  This class stores the information of Patient which extends User
  */
 package healthcare;
 import java.util.*;
@@ -12,6 +10,7 @@ import java.util.*;
 public class Patient extends User implements java.io.Serializable {
     private ArrayList<PainEntry> painHistory;
     private ArrayList<Visit> visitHistory;
+    //instructor for Patient class
     public Patient(String username,String password)
     {
         super(username,password);
@@ -24,6 +23,8 @@ public class Patient extends User implements java.io.Serializable {
         painHistory = new ArrayList<>();
         visitHistory = new ArrayList<>();
     }
+    
+    //getter and setter methods
     public ArrayList<PainEntry> getPainHistory()
     {
         return painHistory;

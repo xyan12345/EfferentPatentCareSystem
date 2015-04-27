@@ -1,18 +1,25 @@
-
+/*
+ * This class create a JFrame for user to create a account
+ */
 package healthcare;
+
 import javax.swing.*;
+
 /**
  *
  * @author Jing Liang
  */
 public class CreateAccountFrame extends javax.swing.JFrame {
+
     private final JFrame previousFrame;
+
     /**
      * Creates new form CreateAccountFrame
+     *
      * @param previousFrame
      */
     public CreateAccountFrame(JFrame previousFrame) {
-        initComponents(); 
+        initComponents();
         btnGroup.add(btnPatient);
         btnGroup.add(btnDoctor);
         this.previousFrame = previousFrame;
@@ -230,51 +237,58 @@ public class CreateAccountFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPatientActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //get user inputs
         String username = txtUsername.getText();
         String password1 = txtPassword1.getText();
         String password2 = txtPassword2.getText();
         String name = txtName.getText();
         int age;
-        String gender =(String) cobGender.getSelectedItem();
+        String gender = (String) cobGender.getSelectedItem();
         String emailAddress = txtEmailAddress.getText();
         String phone = txtPhone.getText();
         String hospital = txtHospital.getText();
-        try
-        {
+        
+        //check user inputs
+        try {
             age = Integer.parseInt(txtAge.getText());
-        if(username.equals("")) JOptionPane.showMessageDialog(this, "Please enter the user name.");
-        else if (password1.equals("") || password2.equals("")) JOptionPane.showMessageDialog(this, "Please enter the password.");
-        else if (!password1.equals(password2)) JOptionPane.showMessageDialog(this, "Password do not match.");
-        else if (name.equals("")) JOptionPane.showMessageDialog(this, "Please enter the name.");
-        else if (gender.equals("I am...")) JOptionPane.showMessageDialog(this, "Please select the gender.");
-        else if (emailAddress.equals("")) JOptionPane.showMessageDialog(this, "Please enter the Email Address.");
-        else if (phone.equals("")) JOptionPane.showMessageDialog(this, "Please enter the phone number.");
-        else if (btnDoctor.isSelected()&& hospital.equals("")) JOptionPane.showMessageDialog(this, "Please enter the hospital.");
-        else
-        {
-            if(btnPatient.isSelected())
-            {
-                Patient patient = new Patient(username,password1,name,gender,age,emailAddress,phone);
-                User user = DataAccessor.getUser(username);
-                if(user==null) DataAccessor.storeUser(patient);
-                else
-                {
-                    JOptionPane.showMessageDialog(this, "Duplicate username.");
-                    return;
+            if (username.equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter the user name.");
+            } else if (password1.equals("") || password2.equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter the password.");
+            } else if (!password1.equals(password2)) {
+                JOptionPane.showMessageDialog(this, "Password do not match.");
+            } else if (name.equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter the name.");
+            } else if (gender.equals("I am...")) {
+                JOptionPane.showMessageDialog(this, "Please select the gender.");
+            } else if (emailAddress.equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter the Email Address.");
+            } else if (phone.equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter the phone number.");
+            } else if (btnDoctor.isSelected() && hospital.equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter the hospital.");
+            } else {
+                //check whether he is a patient or doctor
+                if (btnPatient.isSelected()) {
+                    Patient patient = new Patient(username, password1, name, gender, age, emailAddress, phone);
+                    User user = DataAccessor.getUser(username);
+                    //check if the username already exist
+                    if (user == null) {
+                        DataAccessor.storeUser(patient);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Duplicate username.");
+                        return;
+                    }
+                } else {
+                    Doctor doctor = new Doctor(username, password1, name, gender, age, emailAddress, phone);
+                    doctor.setHospital(hospital);
+                    DataAccessor.storeUser(doctor);
                 }
+                JOptionPane.showMessageDialog(this, "Create Account successfully.");
+                this.setVisible(false);
+                previousFrame.setVisible(true);
             }
-            else
-            {
-                Doctor doctor = new Doctor(username,password1,name,gender,age,emailAddress,phone);
-                doctor.setHospital(hospital);
-                DataAccessor.storeUser(doctor);
-            }
-            JOptionPane.showMessageDialog(this, "Create Account successfully.");
-            this.setVisible(false);
-            previousFrame.setVisible(true);
-        }
-        }catch(java.lang.NumberFormatException ex)
-        {
+        } catch (java.lang.NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Please enter correct age.");
         }
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class provide access for data of User and Waitting list
  */
 package healthcare;
 
@@ -16,7 +14,7 @@ import java.io.*;
 public class DataAccessor {
     public static User getUser(String username)
     {
-        //get user from the database
+        //get user from the file
         String fileName="data/"+ username;
         User user = null;
         try
@@ -34,7 +32,7 @@ public class DataAccessor {
     }
     public static void storeUser(User user)
     {
-        //store user to the database
+        //store user to the file
         File dir = new File("data");
         if (dir.exists()==false) dir.mkdir();
         String fileName="data/" + user.getUserName();
@@ -52,6 +50,7 @@ public class DataAccessor {
     }
     public static WaitingList getWaitingList()
     {
+        //get waitinglist from file
         String fileName="data/"+ "waitingList";
         WaitingList list= new WaitingList();
         try
@@ -69,7 +68,7 @@ public class DataAccessor {
     }
     public static void storeWaitingList(WaitingList list)
     {
-        //store user to the database
+        //store waiting list to the file
         String fileName="data/" + "waitingList";
         try 
         {

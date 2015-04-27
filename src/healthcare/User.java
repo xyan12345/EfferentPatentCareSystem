@@ -12,6 +12,7 @@ package healthcare;
 public class User implements java.io.Serializable {
     private String username,password,name,gender,emailAddress,phoneNumber;
     private int age;
+    //instructor for User class
     public User(String username,String password)
     {
         this.username = username;
@@ -27,6 +28,8 @@ public class User implements java.io.Serializable {
         this.emailAddress = ead;
         this.phoneNumber = phone;
     }
+    
+    //getter and setter methods
     public String getUserName()
     {
         return username;
