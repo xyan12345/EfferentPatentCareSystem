@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package healthcare;
 
 import java.util.ArrayList;
@@ -14,12 +10,19 @@ import java.util.Iterator;
  */
 public class WaitingList implements java.io.Serializable {
     private ArrayList<PainEntry> list;
+    
+    // Initialize Waiting List ArrayList
     public WaitingList()
     {
         list = new ArrayList<>();
     }
+    
+    // Adds elements onto ArrayList
     public void add(PainEntry entry)
     {
+        // Iterates through the arraylist to find similar elements
+        // If found, we remove the entry
+        // Else, add onto list
         for (Iterator<PainEntry> it = list.iterator(); it.hasNext();) {
             PainEntry e = it.next();
             if(e.getPatUserName().equals(entry.getPatUserName()))
@@ -30,6 +33,8 @@ public class WaitingList implements java.io.Serializable {
         }
         list.add(entry);
     }
+    
+    // returns ArrayList
     public ArrayList<PainEntry> getList()
     {
         return list;
