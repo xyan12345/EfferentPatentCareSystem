@@ -246,6 +246,7 @@ public void close()
        DataAccessor.storeWaitingList(list);
        DataAccessor.storeUser(patient);
        this.setVisible(false);
+       frame.updateTable();
     }                                        
 
     private void jSlider6StateChanged(javax.swing.event.ChangeEvent evt) {                                      

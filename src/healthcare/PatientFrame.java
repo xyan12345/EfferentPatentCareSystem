@@ -24,20 +24,16 @@ public class PatientFrame extends javax.swing.JFrame {
     public PatientFrame(Patient pa) {
         patient = pa;
         initComponents();
-        tableModelPain = new DefaultTableModel(new String [] {"Date", "Pain Average", "Treated by"},0);
-        tableModelVisit = new DefaultTableModel(new String [] {"Date", "Hospital Name", "Doctor"},0);
         updateTable();
-        jTablePain.setModel(tableModelPain);
-        jTableVisit.setModel(tableModelVisit);
-        tableModelPain.fireTableDataChanged();
-        tableModelVisit.fireTableDataChanged();
     }
 
     /**
-     * update table content
+     * update the table content
      */
     public void updateTable()
     {
+        tableModelPain = new DefaultTableModel(new String [] {"Date", "Pain Average", "Treated by"},0);
+        tableModelVisit = new DefaultTableModel(new String [] {"Date", "Hospital Name", "Doctor"},0);
         ArrayList<PainEntry> painList = patient.getPainHistory();
         ArrayList<Visit> visitList = patient.getVisitHistory();
         painData = new String[3];
@@ -56,7 +52,8 @@ public class PatientFrame extends javax.swing.JFrame {
             visitData[2] = v.getDocName();
             tableModelVisit.addRow(visitData);
         }
-        
+        jTablePain.setModel(tableModelPain);
+        jTableVisit.setModel(tableModelVisit);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,7 +73,7 @@ public class PatientFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableVisit = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnManage = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,7 +137,12 @@ public class PatientFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Visit History", jPanel2);
 
-        jButton1.setText("Manage Account");
+        btnManage.setText("Manage Account");
+        btnManage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,7 +151,7 @@ public class PatientFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnManage, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnNewEntry, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,7 +169,7 @@ public class PatientFrame extends javax.swing.JFrame {
                         .addGap(138, 138, 138)
                         .addComponent(btnNewEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnManage, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,11 +186,16 @@ public class PatientFrame extends javax.swing.JFrame {
         ne.setVisible(true);
     }//GEN-LAST:event_btnNewEntryActionPerformed
 
+    private void btnManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageActionPerformed
+        ManageAccountFrame frame = new ManageAccountFrame(patient);
+        frame.setVisible(true);
+    }//GEN-LAST:event_btnManageActionPerformed
+
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnManage;
     private javax.swing.JButton btnNewEntry;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

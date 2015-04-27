@@ -79,8 +79,4 @@ public class User implements java.io.Serializable {
     {
         this.phoneNumber = phone;
     }
-    public void updateAccount()
-    {
-        //update the changes to the database
-    }
 }
