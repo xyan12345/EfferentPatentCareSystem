@@ -1,4 +1,6 @@
 /*
+ * Class Description: this class gives the frame of the patient form. 
+ * give user the different buttons.
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -11,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Jing
+ * @author Xuefeng
  */
 public class PatientFrame extends javax.swing.JFrame {
     private Patient patient;
@@ -186,12 +188,12 @@ public class PatientFrame extends javax.swing.JFrame {
     private void btnNewEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewEntryActionPerformed
         NewEntry ne=new NewEntry(patient,this);// TODO add your handling code here:
         ne.setVisible(true);
-    }//GEN-LAST:event_btnNewEntryActionPerformed
+    }//new entry button frame.
 
     private void btnManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageActionPerformed
         ManageAccountFrame frame = new ManageAccountFrame(patient);
         frame.setVisible(true);
-    }//GEN-LAST:event_btnManageActionPerformed
+    }//"Manage account" button frame
 
  
 
