@@ -1,4 +1,6 @@
 /*
+ * Class Description: this is the class with 5 sliders, which can let patient fill in the pain level. 
+ * and send these data to database, and doctor can access these data.
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -232,11 +234,14 @@ public class NewEntry extends javax.swing.JFrame {
     }// </editor-fold>                        
 public void close()
 {
+    // this is the method, which patient can close the new window and not close alll the program.
     WindowEvent winClosingEvent =new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
     Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     
 }
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {    
+    // button listener will pass 5 differents value to waiting list. Doctor can see the name of the patient
+    // set the date to the date, when the patient enter the value
        PainEntry en = new PainEntry(n1,n2,n3,n4,n5);
        en.setPatUserName(patient.getUserName());
        en.setPatName(patient.getName());
@@ -251,7 +256,7 @@ public void close()
     }                                        
 
     private void jSlider6StateChanged(javax.swing.event.ChangeEvent evt) {                                      
-        // TODO add your handling code here:
+        // get the actual value of pain from the user 
         if(!jSlider6.getValueIsAdjusting())
         {
         n1 =(int) jSlider6.getValue();
@@ -260,7 +265,7 @@ public void close()
     }                                     
 
     private void jSlider7StateChanged(javax.swing.event.ChangeEvent evt) {                                      
-        // TODO add your handling code here:
+       // get the actual value of pain from the user 
         if(!jSlider7.getValueIsAdjusting())
         {
         n2 =(int) jSlider7.getValue();
@@ -269,7 +274,7 @@ public void close()
     }                                     
 
     private void jSlider8StateChanged(javax.swing.event.ChangeEvent evt) {                                      
-        // TODO add your handling code here:
+        // get the actual value of pain from the user 
         if(!jSlider8.getValueIsAdjusting())
         {
         n3 =(int) jSlider8.getValue();
@@ -278,7 +283,7 @@ public void close()
     }                                     
 
     private void jSlider9StateChanged(javax.swing.event.ChangeEvent evt) {                                      
-        // TODO add your handling code here:
+       // get the actual value of pain from the user 
         if(!jSlider9.getValueIsAdjusting())
         {
         n4 =(int) jSlider9.getValue();
@@ -287,7 +292,7 @@ public void close()
     }                                     
 
     private void jSlider10StateChanged(javax.swing.event.ChangeEvent evt) {                                       
-        // TODO add your handling code here:
+        // get the actual value of pain from the user 
         if(!jSlider10.getValueIsAdjusting())
         {
         n5 =(int) jSlider10.getValue();
