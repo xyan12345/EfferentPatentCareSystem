@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Xuefeng
+ * @author xuefengyan
  */
 public class PatientFrame extends javax.swing.JFrame {
     private Patient patient;
